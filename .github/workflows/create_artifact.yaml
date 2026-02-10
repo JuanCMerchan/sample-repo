@@ -1,0 +1,34 @@
+name: create_artifact
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  create_artifact:
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Move files
+        run: mkdir dist; mv Hello.txt dist/
+      - name: Create artifact
+        id: create_artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: artifact
+          path: ./dist/*
+      - name: Create attestation
+        uses: actions/attest-build-provenance@v1
+        with: 
+          subject-name: ${{ steps.create_artifact.artifact-url }}
+          subject-digest: ${{ steps.create_artifact.artifact-digest }}
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: artifact
+      - name: Verify attestation
+        run: gh attestation verify artifact.zip -R ${REPOSITORY} --format=json
