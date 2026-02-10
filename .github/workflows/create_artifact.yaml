@@ -30,6 +30,6 @@ jobs:
         uses: actions/attest-build-provenance@v1
         with: 
           subject-name: ${{ steps.create_artifact.outputs.artifact-url }}
-          subject-digest: ${{ steps.create_artifact.outputs.artifact-digest }}
+          subject-digest: sha256:${{ steps.create_artifact.outputs.artifact-digest }}
       - name: Verify attestation
         run: gh attestation verify artifact.zip -R ${REPOSITORY} --format=json
