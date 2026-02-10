@@ -6,6 +6,7 @@ on:
 
 jobs:
   create_artifact:
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
