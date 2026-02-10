@@ -29,7 +29,7 @@ jobs:
         with:
           name: artifact
       - name: List files
-        run: ls
+        run: echo ${PWD}; ls
       - name: Create attestation
         uses: actions/attest-build-provenance@v1
         with: 
