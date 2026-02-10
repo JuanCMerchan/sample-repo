@@ -25,7 +25,7 @@ jobs:
           name: artifact
           path: ./dist/*
       - name: Download artifact
-        run: curl -L -o artifact.zip {{ steps.create_artifact.outputs.artifact-url }}
+        run: curl -L -o artifact.zip ${{ steps.create_artifact.outputs.artifact-url }}
       - name: List files
         run: echo ${PWD}; ls
       - name: Create attestation
