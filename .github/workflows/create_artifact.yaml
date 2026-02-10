@@ -34,4 +34,4 @@ jobs:
           subject-name: ${{ steps.create_artifact.outputs.artifact-url }}
           subject-digest: sha256:${{ steps.create_artifact.outputs.artifact-digest }}
       - name: Verify attestation
-        run: gh attestation verify artifact.zip -R ${REPOSITORY} --format=json
+        run: gh attestation verify artifact.zip -R ${REPOSITORY} --format json
