@@ -29,8 +29,7 @@ jobs:
       - name: Create attestation
         uses: actions/attest-build-provenance@v1
         with: 
-          path: artifact.zip
-          subject-name: ${{ steps.create_artifact.artifact-url }}
-          subject-digest: ${{ steps.create_artifact.artifact-digest }}
+          subject-name: ${{ steps.create_artifact.outputs.artifact-url }}
+          subject-digest: ${{ steps.create_artifact.outputs.artifact-digest }}
       - name: Verify attestation
         run: gh attestation verify artifact.zip -R ${REPOSITORY} --format=json
