@@ -28,6 +28,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: artifact
+      - name: List files
+        run: ls
       - name: Create attestation
         uses: actions/attest-build-provenance@v1
         with: 
